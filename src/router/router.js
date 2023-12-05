@@ -46,7 +46,15 @@ router.beforeEach((to, from, next) => {
 
     // If the animation hasn't played, play it and set the flag
     if (!animationPlayed && to.path === '/') {
-        // You can trigger your animation logic here
+
+        //add on the homepage component (verify if animation has been played, if not play it)
+        //mounted() {
+        //     // Check if the animation has already played
+        //     const animationPlayed = localStorage.getItem('animationPlayed');
+        //
+        //     // Update the local data property accordingly
+        //     this.animationPlayed = animationPlayed === 'true';
+        //   },
 
         // Set the flag in localStorage to indicate that the animation has played
         localStorage.setItem('animationPlayed', 'true');
