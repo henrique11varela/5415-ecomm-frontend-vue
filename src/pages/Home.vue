@@ -8,15 +8,18 @@
             <h1>Example</h1>
         </CardShell>
     </div>
+    <ProductsList></ProductsList>
 </template>
 
 <script>
 import CardShell from '../layouts/CardShell.vue'
 import Item from "../components/Item.vue";
+import ProductsList from '../components/ProductsList.vue';
     export default {
         components: {
             CardShell,
-            Item
+            Item,
+            ProductsList
         }
     }
 </script>

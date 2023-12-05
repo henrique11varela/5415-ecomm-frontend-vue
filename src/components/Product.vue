@@ -1,8 +1,9 @@
 <template>
     <div class="">
-      <h2>{{ product.name }}</h2>
-      <p>{{ product.description }}</p>
-      <p>{{ product.price }}</p>
+        <img :src="product.image" alt="">
+        <h1>{{ product.name }}</h1>
+        <p>{{ product.price }}</p>
+        <p>{{ product.rating }}</p>
     </div>
   </template>
   
