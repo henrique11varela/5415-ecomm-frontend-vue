@@ -4,14 +4,23 @@
 <template>
     <div>
         <ContactForm />
+        <div class="flex flex-wrap justify-center">
+            <ContactCard />
+            <ContactCard />
+            <ContactCard />
+            <ContactCard />
+        </div>
+        
     </div>
 </template>
 
 <script>
-import ContactForm from '../../layouts/contact/ContactForm.vue'
+import ContactForm from '../../components/contact/ContactForm.vue'
+import ContactCard from '../../components/contact/ContactCard.vue'
     export default {
         components: {
-            ContactForm
+            ContactForm,
+            ContactCard
         }
     }
 </script>
