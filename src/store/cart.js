@@ -1,28 +1,17 @@
 import { defineStore } from 'pinia';
-import { useProductService } from '@/services/productService';
+import { useProductStore } from '@/store/products';
+
 
 export const useCartStore = defineStore('cart', {
     state: () => ({
         cartItems: [],
-        products: [],
     }),
 
     actions: {
 
-        //before loading product list we fetch it using the store and then render the useCartStore.products
-        async fetchProductList() {
-            const productService = useProductService();
-
-            try {
-                const products = await productService.fetchProducts();
-                this.products = products;
-            } catch (error) {
-                console.error('Error fetching product list:', error);
-            }
-        },
-
         addToCart(productId) {
-            const product = this.products.find(item => item.id === productId);
+            const productStore = useProductStore(); // create an instance of the product store
+            const product = productStore.products.find(item => item.id === productId);
 
             if (product) {
                 const existingProduct = this.cartItems.find(item => item.id === productId);
@@ -63,6 +52,10 @@ export const useCartStore = defineStore('cart', {
 
         selectProduct(productId) {
             this.cartItems = this.cartItems.filter(item => item.id == productId);
+        },
+
+        clearCart() {
+            this.cartItems = [];
         },
     },
 
