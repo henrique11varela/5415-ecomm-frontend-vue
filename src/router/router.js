@@ -40,6 +40,21 @@ const routes = [
     },
 ]
 
+router.beforeEach((to, from, next) => {
+    // Check if the animation has already played
+    const animationPlayed = localStorage.getItem('animationPlayed');
+
+    // If the animation hasn't played, play it and set the flag
+    if (!animationPlayed && to.path === '/') {
+        // You can trigger your animation logic here
+
+        // Set the flag in localStorage to indicate that the animation has played
+        localStorage.setItem('animationPlayed', 'true');
+    }
+
+    next();
+});
+
 const router = createRouter({
     // 4. Provide the history implementation to use. We are using the hash history for simplicity here.
     history: createWebHashHistory(),
