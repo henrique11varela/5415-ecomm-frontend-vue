@@ -15,8 +15,8 @@
 </template>
 
 <script>
-import ContactForm from '../../components/contact/ContactForm.vue'
-import ContactCard from '../../components/contact/ContactCard.vue'
+import ContactForm from '../components/Contact/ContactForm.vue'
+import ContactCard from '../components/Contact/ContactCard.vue'
     export default {
         components: {
             ContactForm,

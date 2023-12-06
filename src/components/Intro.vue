@@ -42,7 +42,10 @@ export default {
     left: 0;
     min-height: 100dvh;
     width: 100vw;
-    background: radial-gradient(ellipse at bottom, #1B2735 0%, #090A0F 100%);
+    /* background: radial-gradient(ellipse at bottom, #1B2735 0%, #090A0F 100%); */
+    background: linear-gradient(334deg, #070b0f 40%, #1d262e 50%, #070b0f 60%);
+    background-size: 180% 180%;
+    animation: gradient-animation 5.5s ease;
     overflow: hidden;
     z-index: 1000;
 }
@@ -116,6 +119,19 @@ export default {
         transform: translateY(-2000px);
     }
 }
+
+@keyframes gradient-animation {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
 .close{
     min-height: 0px;
     opacity: 0;
