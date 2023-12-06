@@ -1,4 +1,5 @@
-import { createRouter, createWebHashHistory } from 'vue-router';
+import { createRouter, createWebHistory } from 'vue-router';
+import { routes } from './routes.js'
 
 //importar os components que vao ser as pages do router
 
@@ -13,32 +14,11 @@ const ProductId = {
     template: '<div>Product {{ id }}</div>',
 }
 
-const routes = [
-    {
-        path: '/',
-        name: 'home',
-        component: Home //trocar para o nome de cada um dos componentes
-    },
-
-    {
-        path: '/Products',
-        name: 'Products',
-        component: Products //trocar para o nome de cada um dos componentes
-    },
-
-    {
-        path: '/Product/:id',
-        name: 'Product',
-        component: Product, //trocar para o nome de cada um dos componentes
-        props: true
-    },
-
-    {
-        path: '/Contacts',
-        name: 'Contacts',
-        component: Contacts //trocar para o nome de cada um dos componentes
-    },
-]
+const router = createRouter({
+    // 4. Provide the history implementation to use. We are using the hash history for simplicity here.
+    history: createWebHistory(),
+    routes,
+})
 
 router.beforeEach((to, from, next) => {
     // Check if the animation has already played
@@ -63,10 +43,5 @@ router.beforeEach((to, from, next) => {
     next();
 });
 
-const router = createRouter({
-    // 4. Provide the history implementation to use. We are using the hash history for simplicity here.
-    history: createWebHashHistory(),
-    routes,
-})
 
 export default router;
