@@ -1,6 +1,5 @@
 <template>
     <div class="flex justify-center items-center">
-        <Intro></Intro>
         <CardShell class="w-52" shiny tiltable>
             <Item>
             </Item>
@@ -13,7 +12,6 @@
 </template>
 
 <script>
-import Intro from '../components/Intro.vue'
 import CardShell from '../layouts/CardShell.vue'
 import Item from "../components/Item.vue";
 import ProductsList from '../components/ProductsList.vue';
@@ -21,8 +19,7 @@ import ProductsList from '../components/ProductsList.vue';
         components: {
             CardShell,
             Item,
-            ProductsList,
-            Intro
+            ProductsList
         }
     }
 </script>
