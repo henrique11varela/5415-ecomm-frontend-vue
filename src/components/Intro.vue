@@ -1,5 +1,5 @@
 <template>
-    <div ref="intro" class="wrapper">
+    <div ref="intro" class="wrapper" >
         <div ref="stars1" id="stars1"></div>
         <div ref="stars2" id="stars2"></div>
         <div ref="stars3" id="stars3"></div>
@@ -37,7 +37,7 @@ export default {
 
 <style scoped>
 .wrapper {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     min-height: 100dvh;
@@ -59,7 +59,7 @@ export default {
     width: 1px;
     height: 1px;
     background: transparent;
-    animation: animStar 50s linear infinite;
+    animation: animStar 50s linear;
 }
 
 
@@ -67,14 +67,14 @@ export default {
 #stars2 {
     width: 2px;
     height: 2px;
-    animation: animStar 100s linear infinite;
+    animation: animStar 100s linear;
 }
 
 #stars3 {
     width: 3px;
     height: 3px;
     
-    animation: animStar 80s linear infinite;
+    animation: animStar 80s linear;
 }
 
 #stars1:after,
