@@ -23,6 +23,7 @@ export const routes = [
     {
         path: '/Contacts',
         name: 'Contacts',
-        component: () => import('../pages/Contact.vue') //trocar para o nome de cada um dos componentes
+        component: () => import('../pages/Contact.vue')
     },
+
 ]
