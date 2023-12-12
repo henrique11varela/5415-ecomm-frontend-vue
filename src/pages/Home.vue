@@ -9,6 +9,8 @@
         </CardShell>
     </div>
     <ProductsList></ProductsList>
+    <ProductsList></ProductsList>
+    <ProductsList></ProductsList>
 </template>
 
 <script>
