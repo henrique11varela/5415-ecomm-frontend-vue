@@ -1,10 +1,10 @@
-import { useFetch } from 'use-vue';
+// import { useFetch } from 'use-vue';
 
 // Replace this URL with API endpoint (after npm run dev)
 const API_URL = 'localhost:3333';
 
 export function useProductService() {
-    const { data, error, fetch } = useFetch();
+    // const { data, error, fetch } = useFetch();
 
     async function fetchProducts() {
         try {
@@ -20,5 +20,5 @@ export function useProductService() {
         }
     }
 
-    return { data, error, fetchProducts };
+    return { fetchProducts };
 }
