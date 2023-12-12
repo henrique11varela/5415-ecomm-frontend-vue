@@ -1,14 +1,13 @@
 <script setup>
 import { RouterView, RouterLink } from 'vue-router'
 import MasterLayout from './layouts/Master.vue'
+import Navbar from './components/Navbar.vue'
 </script>
 
 <template>
   <MasterLayout>
     <template v-slot:header>
-      header placeholder
-      <RouterLink :to="{name: 'Home'}">home</RouterLink>
-      <RouterLink :to="{name: 'Contacts'}">contacts</RouterLink>
+      <Navbar></Navbar>
     </template>
     <RouterView />
     <template v-slot:footer>
