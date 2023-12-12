@@ -1,19 +1,19 @@
-<!-- Aqui vai importar todos os componentes para construir a pagina -->
-
-
 <template>
-    <div class="flex flex-wrap justify-center">
-        <ContactForm class="w-full md:w-1/2 lg:w-1/2 xl:w-1/4"/>
-        <ContactMap class=" w-full md:w-1/2 lg:w-1/2 xl:w-3/4 md:h-full lg:h-full xl:h-full"/>
-    </div>
-    <div class="flex flex-wrap justify-center">
-        <ContactCard v-for="member in members" :key="member.name" :member="member" />
-      
+    <div class=" ">
+        <div class="md:flex md:max-w-2xl md:w-full md:mx-auto">
+            <ContactForm class="" />
+            <ContactMap class="h-full " />
+        </div>
+        <div class="flex flex-col md:flex-row flex-wrap justify-center">
+            <ContactCard class="card cursor-pointer" v-for="member in members" :key="member.name" :member="member"
+                @click="redirectTo(member.Github)" @mouseover="handleMouseOver(member)" @mouseout="handleMouseOut(member)"
+                :class="{ 'hovered': member.isHovered }" />
+        </div>
     </div>
 </template>
 
 <script>
-import ContactForm from '../components/contact/ContactForm.vue'
+import ContactForm from '../components/Contact/ContactForm.vue'
 import ContactCard from '../components/Contact/ContactCard.vue'
 import ContactMap from '../components/Contact/ContactMap.vue'
 import { useMembersStore } from '../store/members.js';
@@ -27,7 +27,28 @@ export default {
     computed: {
         ...mapState(useMembersStore, ['members']),
     },
+    methods: {
+        redirectTo(member) {
+            window.open(member)
+        },
+        handleMouseOver(member) {
+            member.isHovered = true;
+        },
+        handleMouseOut(member) {
+            member.isHovered = false;
+        },
+    }
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+.card {
+    width: 200px;
+    height: 150px;
+    transition: transform 0.3s;
+}
+
+.card.hovered {
+    transform: scale(1.1);
+}
+</style>
