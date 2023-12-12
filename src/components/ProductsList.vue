@@ -1,13 +1,14 @@
 <template>
-    <div>
-      <h1>Products List</h1>
-      <CardShell v-for="product in products" :key="product.id" tiltable shiny>
+  <div>
+    <div class="grid grid-cols-4 max-w-full gap-8 my-10 justify-center px-40">
+      <CardShell class="w-full h-full" v-for="product in products" :key="product.id" tiltable shiny >
         <Product :product="product" />
       </CardShell>
     </div>
-  </template>
+  </div>
+</template>
   
-  <script>
+<script>
   import Product from "./Product.vue";
   import CardShell from "../layouts/CardShell.vue";
   
@@ -36,4 +37,4 @@
       }
     }
   };
-  </script>
+</script>
