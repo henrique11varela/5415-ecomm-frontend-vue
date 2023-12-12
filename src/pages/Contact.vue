@@ -2,29 +2,32 @@
 
 
 <template>
-    <div>
-        <ContactForm />
-        <div class="flex flex-wrap justify-center">
-            <ContactCard />
-            <ContactCard />
-            <ContactCard />
-            <ContactCard />
-        </div>
-        
+    <div class="flex flex-wrap justify-center">
+        <ContactForm class="w-full md:w-1/2 lg:w-1/2 xl:w-1/4"/>
+        <ContactMap class=" w-full md:w-1/2 lg:w-1/2 xl:w-3/4 md:h-full lg:h-full xl:h-full"/>
+    </div>
+    <div class="flex flex-wrap justify-center">
+        <ContactCard v-for="member in members" :key="member.name" :member="member" />
+      
     </div>
 </template>
 
 <script>
-import ContactForm from '../components/Contact/ContactForm.vue'
+import ContactForm from '../components/contact/ContactForm.vue'
 import ContactCard from '../components/Contact/ContactCard.vue'
-    export default {
-        components: {
-            ContactForm,
-            ContactCard
-        }
-    }
+import ContactMap from '../components/Contact/ContactMap.vue'
+import { useMembersStore } from '../store/members.js';
+import { mapState } from 'pinia';
+export default {
+    components: {
+        ContactForm,
+        ContactCard,
+        ContactMap
+    },
+    computed: {
+        ...mapState(useMembersStore, ['members']),
+    },
+}
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>
