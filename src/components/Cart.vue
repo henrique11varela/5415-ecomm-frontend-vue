@@ -2,7 +2,7 @@
     <div>
         <div class="cartbg" :class="{open: cartOpen}">
             <div class="cart">
-
+                <h1>{{ cartItems.length }} Items in the cart</h1>
             </div>
         </div>
         <div class="cartbutton" @click="()=>{cartOpen = !cartOpen}">

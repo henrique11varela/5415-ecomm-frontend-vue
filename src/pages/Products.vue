@@ -1,7 +1,5 @@
 <template>
     <ProductsList></ProductsList>
-    <ProductsList></ProductsList>
-    <ProductsList></ProductsList>
 </template>
 
 <script>

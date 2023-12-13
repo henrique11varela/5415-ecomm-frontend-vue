@@ -11,6 +11,7 @@ export const useCartStore = defineStore('cart', {
 
         addToCart(productId) {
             const productStore = useProductStore(); // create an instance of the product store
+            console.log(productStore);
             const product = productStore.products.find(item => item.id === productId);
 
             if (product) {
