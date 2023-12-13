@@ -4,20 +4,19 @@ export const routes = [
     {
         path: '/',
         name: 'Home',
-        component: Home //trocar para o nome de cada um dos componentes
+        component: Home
     },
 
     {
         path: '/Products',
         name: 'Products',
-        component: Home //trocar para o nome de cada um dos componentes
+        component: () => import('../pages/Products.vue')
     },
 
     {
         path: '/Product/:id',
         name: 'Product',
-        component: Home, //trocar para o nome de cada um dos componentes
-        props: true
+        component: () => import('../pages/ProductDetails.vue')
     },
 
     {

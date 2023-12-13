@@ -38,7 +38,7 @@ export default {
     right: 1rem;
     z-index: 50;
     padding: .40rem;
-    @apply rounded-full w-20 md:w-10 aspect-square bg-primary
+    @apply rounded-full w-16 md:w-16 aspect-square bg-primary
 }
 
 .cartbg {
