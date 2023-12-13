@@ -1,31 +1,16 @@
 <template>
-    <div class="flex justify-center items-center">
-        <CardShell class="w-52" shiny tiltable>
-            <Item>
-            </Item>
-        </CardShell>
-        <CardShell class="w-52 ms-10" tiltable>
-            <h1>Example</h1>
-        </CardShell>
-    </div>
-    <ProductsList></ProductsList>
-    <ProductsList></ProductsList>
-    <ProductsList></ProductsList>
+    <img class="w-full object-cover h-80" :src="landing" alt="">
 </template>
 
 <script>
-import CardShell from '../layouts/CardShell.vue'
-import Item from "../components/Item.vue";
-import ProductsList from '../components/ProductsList.vue';
-    export default {
-        components: {
-            CardShell,
-            Item,
-            ProductsList
+import landing from '../assets/landing.jpg'
+export default {
+    data() {
+        return {
+            landing: landing
         }
     }
+}
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>
