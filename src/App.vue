@@ -15,7 +15,7 @@ import Intro from './components/Intro.vue'
       <Navbar></Navbar>
     </template>
       
-      <Intro></Intro>
+<!--      <Intro></Intro>-->
       <RouterView />
       <Cart />
 
