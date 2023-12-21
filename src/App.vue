@@ -15,11 +15,9 @@ import Intro from './components/Intro.vue'
     <template v-slot:header>
       <Navbar></Navbar>
     </template>
-      
-     
+
        <Intro></Intro>
     
-      
       <RouterView />
       <Cart />
 
