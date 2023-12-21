@@ -2,6 +2,7 @@
 import { RouterView, RouterLink } from 'vue-router'
 import MasterLayout from './layouts/Master.vue'
 import Navbar from './components/Navbar.vue'
+import Footer from './components/Footer.vue'
 
 import Cart from './components/Cart.vue'
 import Intro from './components/Intro.vue'
@@ -23,7 +24,7 @@ import Intro from './components/Intro.vue'
       <Cart />
 
     <template v-slot:footer>
-      footer placeholder
+      <Footer></Footer>
     </template>
   </MasterLayout>
 </template>

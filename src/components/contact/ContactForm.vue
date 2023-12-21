@@ -4,7 +4,7 @@
             <h1 class="text-3xl font-bold mb-4">Contact Us</h1>
             <!-- Form -->
             <div class="">
-                <form class="flex flex-col space-y-4">
+                <form @submit.prevent class="flex flex-col space-y-4">
                     <div class="mb-4">
                         <label for="name" class="block text-gray-700 text-sm font-bold mb-2">Name</label>
                         <input type="text" id="name" name="name"
