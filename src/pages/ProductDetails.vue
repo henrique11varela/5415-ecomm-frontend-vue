@@ -1,15 +1,16 @@
 <template>
-    <ProductDetails v-if="state.productLoaded" :product="state.product" />
+    <DetailsProduct v-if="state.productLoaded" :product="state.product" />
 </template>
 
 <script setup>
 import { useProductStore } from "../store/products";
 import {onBeforeMount, reactive} from "vue";
 import { useRoute } from "vue-router";
-import ProductDetails from "../components/ProductDetails.vue";
+import DetailsProduct from "../components/DetailsProduct.vue";
 
 const route = useRoute();
 const id = route.params.id;
+const productStore = useProductStore();
 
 const state = reactive({
   productLoaded: false,
@@ -21,7 +22,7 @@ onBeforeMount(() => {
 })
 
 const retrieveProduct = async () => {
-  await useProductStore().fetchProductList();
+  await productStore.fetchProductList();
   state.product = useProductStore().productById(Number(id));
   state.productLoaded = true;
 }
