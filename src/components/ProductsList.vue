@@ -1,7 +1,7 @@
 <template>
   <div>
-    <div class="flex flex-col mx-8 gap-8 md:grid md:grid-cols-4 md:max-w-full md:gap-8 md:my-10 md:justify-center md:px-40 md:mx-20">
-      <CardShell class="w-full h-full" v-for="product in allProducts" :key="product.id" tiltable shiny>
+    <div class="flex flex-col mx-8 gap-8 md:flex-wrap md:max-w-full md:flex-1 md:flex-row md:my-10 md:justify-center md:px-40 md:mx-20">
+      <CardShell class="w-full h-50 md:max-w-48" v-for="product in allProducts" :key="product.id" tiltable shiny>
         <Product :product="product" />
       </CardShell>
     </div>
