@@ -19,7 +19,8 @@
                     <form class="flex flex-col">
                         <input class="rounded-lg mb-4 shadow-md shadow-black" type="text" name="coupon" v-model="coupon">
                         <button class="bg-primary mb-4 rounded-lg" @click.prevent="() => alert('testing coupon')">Test Coupon</button>
-                        <button class="bg-primary rounded-lg" @click.prevent="() => alert('testing Checkout')">Checkout</button>
+                        <button class="bg-primary mb-4 rounded-lg" @click.prevent="() => alert('testing Checkout')">Checkout</button>
+                        <button class="bg-primary rounded-lg" @click="clearCart">Clear Cart</button>
                     </form>
                 </div>
             </div>
@@ -63,7 +64,7 @@ export default {
         }
     },
     methods: {
-        ...mapActions(useCartStore, ['addToCart', 'removeQuantity']),
+        ...mapActions(useCartStore, ['addToCart', 'removeQuantity', 'clearCart']),
     },
     computed: {
         ...mapState(useCartStore, ['cartItems'])
