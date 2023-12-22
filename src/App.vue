@@ -16,10 +16,10 @@ import Intro from './components/Intro.vue'
       <Navbar></Navbar>
     </template>
 
-      <!--
+      
 
         <Intro></Intro>
-      --> 
+      
     
       <RouterView />
       <Cart />

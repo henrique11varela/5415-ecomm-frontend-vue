@@ -15,13 +15,17 @@
                         </div>
                     </CardShell>
                 </div>
-                <div class="p-4" style="border: 1px solid blue;">
+                <div class="p-4 md>w-1/4">
                     <form class="flex flex-col">
-                        <input class="rounded-lg mb-4 shadow-md shadow-black" type="text" name="coupon" v-model="coupon">
-                        <button class="bg-primary mb-4 rounded-lg" @click.prevent="() => alert('testing coupon')">Test Coupon</button>
-                        <button class="bg-primary mb-4 rounded-lg" @click.prevent="() => alert('testing Checkout')">Checkout</button>
+                        <input class="rounded-lg shadow-md shadow-black" :class="{}" type="text" name="coupon"
+                            v-model="coupon">
+                        <span class="mx-auto text-xs mb-4">{{ resultMessage }}</span>
+                        <button class="bg-primary mb-4 rounded-lg" @click.prevent="checkCoupon">Test Coupon</button>
+                        <p>{{ cartTotalQuantity }}</p>
+                        <p>{{ Math.round(cartTotalPrice * (1 - discount / 100) * 100) / 100 }}</p>
+                        <button class="bg-primary rounded-lg"
+                            @click.prevent="checkoutLocal">Checkout</button>
                         <button class="bg-primary rounded-lg" @click="clearCart">Clear Cart</button>
-
                     </form>
                 </div>
             </div>
@@ -58,17 +62,18 @@ import CardShell from "../layouts/CardShell.vue";
 import { useCartStore } from "../store/cart.js";
 import { mapState, mapActions } from "pinia";
 import { verifyCoupon } from "../services/couponService.js";
+import { checkout } from "../services/checkoutService.js";
 
 export default {
     data() {
         return {
             cartOpen: false,
             coupon: "",
+            discount: 0,
             resultMessage: "",
         }
     },
     methods: {
-
         ...mapActions(useCartStore, ['addToCart', 'removeQuantity', 'clearCart']),
         async checkCoupon() {
             const couponCode = this.coupon.trim();
@@ -82,6 +87,7 @@ export default {
                 const result = await verifyCoupon(couponCode);
 
                 if (result.response) {
+                    this.discount = result.discount
                     this.resultMessage = `Valid Coupon! Discount: ${result.discount}% - ${result.message}`;
                 } else {
                     this.resultMessage = `Invalid Coupon! Reason: ${result.message}`;
@@ -90,9 +96,29 @@ export default {
                 this.resultMessage = "Error checking the Coupon. Please, try again!";
             }
         },
+        async checkoutLocal(){
+            if (this.cartTotalQuantity > 0) {
+                const items = this.cartItems.map((item) => { 
+                    return {
+                        id: item.id,
+                        quantity: item.quantity
+                    } 
+                })
+                const success = await checkout(items, this.coupon)
+                if (success){
+                    this.clearCart()
+                    this.coupon = ""
+                    alert("YOU BOUGHT STUFF!!")
+                }
+                else {
+                    alert("Error on checkout")
+                }
+
+            }
+        }
     },
     computed: {
-        ...mapState(useCartStore, ['cartItems'])
+        ...mapState(useCartStore, ['cartItems', 'cartTotalQuantity', 'cartTotalPrice'])
     },
     components: {
         CardShell
@@ -141,7 +167,6 @@ export default {
 
 .innerCart {
     flex-grow: 1;
-    border: 1px red solid;
 }
 
 .open>.cart {
@@ -149,4 +174,5 @@ export default {
     opacity: 1;
     width: calc(100vw - 2.5rem);
     height: calc(100dvh - 2rem);
-}</style>
+}
+</style>
