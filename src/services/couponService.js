@@ -2,12 +2,10 @@
 
 export async function verifyCoupon(couponCode) {
     
-    const API_URL = 'http://127.0.0.1:3333/check-coupon';
-    const retries = 3;
+    const API_URL = 'http://127.0.0.1:3333'; 
 
-    while (retries > 0) {
         try {
-            const response = await fetch(API_URL, {
+            const response = await fetch(API_URL + "/check-coupon", {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -16,16 +14,12 @@ export async function verifyCoupon(couponCode) {
             });
             
             const data = await response.json();
-
-            return (data.couponcode)
-                ? { response: true, message: data.message, discount: data.discount ,coupon: data.couponcode }
+            
+            return (data.success)
+                ? { response: true, message: data.message, discount: data.discount }
                 : { response: false, message: data.error };
         } catch (error) {
-            console.log(`error -> retries left: ${retries}`);
+            console.log(`Error: ${error}`);
         }
 
-        retries--;
     }
-
-    return false;
-}
