@@ -1,6 +1,7 @@
 <script setup>
 import {defineProps, onMounted, ref } from 'vue'
 import StarRating from "./StarRating.vue";
+import { useCartStore } from "../store/cart.js";
 
 const props = defineProps({
   product: {
@@ -9,31 +10,29 @@ const props = defineProps({
   }
 })
 
-let buyQuantity = ref(1);
+const buyQuantity = ref(1);
+const cartStore = useCartStore();
 
-const inputQuantity = ref(null);
-
-onMounted(() => {
-  console.log(props.product)
-})
-
-
-
-
-function increment() {
+const increment = () => {
     if(buyQuantity.value < props.product.quantity) buyQuantity.value++;
-  console.log(buyQuantity)
 }
 
-function decrement() {
+const decrement = () => {
   if(buyQuantity.value > 1) buyQuantity.value--;
-  console.log(buyQuantity)
 }
 
-function inputVerifications() {
-   if(buyQuantity.value > props.product.quantity) buyQuantity.value = props.product.quantity;
-   if(buyQuantity.value < 1) buyQuantity.value = 1;
-  console.log(buyQuantity)
+const inputVerifications = () => {
+   setTimeout((() => {if(buyQuantity.value > props.product.quantity) buyQuantity.value = props.product.quantity}), 1000);
+   setTimeout((()=> {if(buyQuantity.value < 1) buyQuantity.value = 1}), 4000);
+}
+
+const addToCart = () => {
+  if(!cartStore.addToCart(props.product.id, buyQuantity.value)){
+    alert("Cart quantity changed to maximum available quantity");
+  }
+  else{
+    alert("Product added to cart");
+  }
 }
 
 </script>
@@ -44,12 +43,15 @@ function inputVerifications() {
       <img class="max-h-64" :src="product.image" alt="image">
     </div>
     <div class="w-full md:w-3/5">
-      <div class="flex flex-col justify-center ml-8 mt-12 md:mt-0">
-        <div class="text-3xl"> {{ product.name }} </div>
+      <div class="flex flex-col justify-center ml-8 mt-12 md:mt-0 ProductInfo">
+        <div class="text-3xl ProductName"> {{ product.name }} </div>
         <StarRating class="mt-2" :rating="product.rating"/>
         <div class="text-5xl my-8">{{ product.price }} €</div>
+        <div class="About">About</div>
         <div class="Description"> {{ product.description }}</div>
       </div>
+
+
       <div class="flex flex-col place-items-start ml-8 my-4">
         <div>
           <form class="max-w-xs mx-auto">
@@ -71,9 +73,10 @@ function inputVerifications() {
         </div>
 
           <div class="flex justify-center mt-8">
-            <button class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow">
+            <button @click="addToCart" class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow">
               Add to cart
             </button>
+
           </div>
         </div>
     </div>
@@ -91,13 +94,22 @@ input[type='number']::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
-
-.custom-number-input input:focus {
-  outline: none !important;
+.ProductInfo {
+  font-weight: 300;
+  font-size: 1.1rem;
+  line-height: 1.5rem;
+  color: #070b0f;
 }
 
-.custom-number-input button:focus {
-  outline: none !important;
+.ProductName {
+  font-weight: 900;
+  font-size: 2.5rem;
+}
+
+.About{
+  font-weight: 700;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
 }
 
 </style>
