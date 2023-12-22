@@ -25,6 +25,7 @@
                         <p>{{ Math.round(cartTotalPrice * (1 - discount / 100) * 100) / 100 }}</p>
                         <button class="bg-primary rounded-lg"
                             @click.prevent="checkoutLocal">Checkout</button>
+                        <button class="bg-primary rounded-lg" @click="clearCart">Clear Cart</button>
                     </form>
                 </div>
             </div>
