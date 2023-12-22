@@ -18,7 +18,8 @@
                 <div class="p-4" style="border: 1px solid blue;">
                     <form class="flex flex-col">
                         <input class="rounded-lg mb-4 shadow-md shadow-black" type="text" name="coupon" v-model="coupon">
-                        <button class="bg-primary mb-4 rounded-lg" @click.prevent="() => alert('testing coupon')">Test Coupon</button>
+                        <button class="bg-primary mb-4 rounded-lg" @click.prevent="checkCoupon">Test Coupon</button>
+                        <p>{{ resultMessage }}</p>
                         <button class="bg-primary rounded-lg" @click.prevent="() => alert('testing Checkout')">Checkout</button>
                     </form>
                 </div>
@@ -55,15 +56,38 @@
 import CardShell from "../layouts/CardShell.vue";
 import { useCartStore } from "../store/cart.js";
 import { mapState, mapActions } from "pinia";
+import { verifyCoupon } from "../services/couponService.js";
+
 export default {
     data() {
         return {
             cartOpen: false,
             coupon: "",
+            resultMessage: "",
         }
     },
     methods: {
         ...mapActions(useCartStore, ['addToCart', 'removeQuantity']),
+        async checkCoupon() {
+            const couponCode = this.coupon.trim();
+
+            if (couponCode === "") {
+                this.resultMessage = "Coupon Invalid. Please, insert a valid coupon";
+                return;
+            }
+
+            try {
+                const result = await verifyCoupon(couponCode);
+
+                if (result.response) {
+                    this.resultMessage = `Valid Coupon! Discount: ${result.discount}% - ${result.message}`;
+                } else {
+                    this.resultMessage = `Invalid Coupon! Reason: ${result.message}`;
+                }
+            } catch (error) {
+                this.resultMessage = "Error checking the Coupon. Please, try again!";
+            }
+        },
     },
     computed: {
         ...mapState(useCartStore, ['cartItems'])
