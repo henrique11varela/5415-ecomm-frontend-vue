@@ -9,8 +9,8 @@ export const useCartStore = defineStore('cart', {
 
     actions: {
 
-        addToCart(productId) {
-            const productStore = useProductStore(); // create an instance of the product store
+        addToCart(productId, quantity = 1) {
+            const productStore = useProductStore();
             console.log(productStore);
             const product = productStore.products.find(item => item.id === productId);
 
@@ -18,13 +18,20 @@ export const useCartStore = defineStore('cart', {
                 const existingProduct = this.cartItems.find(item => item.id === productId);
 
                 if (existingProduct) {
-                    existingProduct.quantity += 1;
+                    if(existingProduct.quantity + quantity < product.quantity) {
+                        existingProduct.quantity += quantity;
+                    }
+                    else{
+                        existingProduct.quantity = product.quantity;
+                        return false;
+                    }
                 } else {
-                    this.cartItems.push({ ...product, quantity: 1 });
+                    this.cartItems.push({ ...product, quantity });
                 }
             } else {
                 console.warn(`Product with ID ${productId} not found.`);
             }
+            return true;
         },
 
         addQuantity(productId) {
