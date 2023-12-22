@@ -20,7 +20,6 @@ let productList = ref(null);
  onMounted( async () =>{
     await productStore.fetchProductList();
     productList.value = productStore.allProducts;
-    console.log(productStore.allProducts)
 })
 
 

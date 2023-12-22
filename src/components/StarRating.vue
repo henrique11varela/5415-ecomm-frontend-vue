@@ -8,11 +8,6 @@ const props = defineProps({
   }
 })
 
-onMounted(() => {
-  console.log(props.rating)
-
-})
-
 </script>
 
 <template>

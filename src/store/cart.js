@@ -11,7 +11,6 @@ export const useCartStore = defineStore('cart', {
 
         addToCart(productId, quantity = 1) {
             const productStore = useProductStore();
-            console.log(productStore);
             const product = productStore.products.find(item => item.id === productId);
 
             if (product) {

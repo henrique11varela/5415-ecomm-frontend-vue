@@ -10,37 +10,29 @@ const props = defineProps({
   }
 })
 
-let buyQuantity = ref(1);
+const buyQuantity = ref(1);
 const cartStore = useCartStore();
-
-
-onMounted(() => {
-  console.log(props.product)
-})
-
 
 const increment = () => {
     if(buyQuantity.value < props.product.quantity) buyQuantity.value++;
-  console.log(buyQuantity)
 }
 
 const decrement = () => {
   if(buyQuantity.value > 1) buyQuantity.value--;
-  console.log(buyQuantity)
 }
 
 const inputVerifications = () => {
    setTimeout((() => {if(buyQuantity.value > props.product.quantity) buyQuantity.value = props.product.quantity}), 1000);
    setTimeout((()=> {if(buyQuantity.value < 1) buyQuantity.value = 1}), 4000);
-  console.log(buyQuantity)
 }
 
 const addToCart = () => {
   if(!cartStore.addToCart(props.product.id, buyQuantity.value)){
-    alert("Cart quantity changed to maximum available quantity")
+    alert("Cart quantity changed to maximum available quantity");
   }
-
-  console.log(cartStore.cartTotalQuantity)
+  else{
+    alert("Product added to cart");
+  }
 }
 
 </script>
@@ -102,11 +94,7 @@ input[type='number']::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
-
-@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@300;700;900&family=Ubuntu:wght@300;500&display=swap');
-
 .ProductInfo {
-  font-family: 'Ubuntu', sans-serif;
   font-weight: 300;
   font-size: 1.1rem;
   line-height: 1.5rem;
