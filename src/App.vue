@@ -11,16 +11,17 @@ import Intro from './components/Intro.vue'
 </script>
 
 <template>
+
   <MasterLayout>
     <template v-slot:header>
       <Navbar></Navbar>
     </template>
 
-      
 
-        <Intro></Intro>
-      
-    
+
+<!--        <Intro></Intro>-->
+
+
       <RouterView />
       <Cart />
 
