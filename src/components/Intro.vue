@@ -1,5 +1,5 @@
 <template>
-    <div ref="intro" class="wrapper">
+    <div ref="intro" class="wrapper" v-if="playIntro">
         <div ref="stars1" id="stars1"></div>
         <div ref="stars2" id="stars2"></div>
         <div ref="stars3" id="stars3"></div>
@@ -11,6 +11,11 @@
 
 <script>
 export default {
+    computed: {
+        playIntro: function(){
+            return localStorage.getItem('introPlayed') != 'true'
+        }
+    },
     methods: {
         multipleBoxShadow(n) {
             let value = '';
@@ -27,9 +32,13 @@ export default {
         this.$refs.stars1.style.boxShadow = this.multipleBoxShadow(700);
         this.$refs.stars2.style.boxShadow = this.multipleBoxShadow(700);
         this.$refs.stars3.style.boxShadow = this.multipleBoxShadow(500);
-        setTimeout(()=>{
+        setTimeout(() => {
             this.$refs.intro.classList.add('close')
         }, 3000);
+        localStorage.setItem('introPlayed', 'true')
+        window.onbeforeunload = function (e) {
+            localStorage.removeItem('introPlayed')
+        };
     }
 }
 
@@ -37,7 +46,7 @@ export default {
 
 <style scoped>
 .wrapper {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     min-height: 100dvh;
@@ -59,7 +68,7 @@ export default {
     width: 1px;
     height: 1px;
     background: transparent;
-    animation: animStar 50s linear infinite;
+    animation: animStar 50s linear;
 }
 
 
@@ -67,14 +76,14 @@ export default {
 #stars2 {
     width: 2px;
     height: 2px;
-    animation: animStar 100s linear infinite;
+    animation: animStar 100s linear;
 }
 
 #stars3 {
     width: 3px;
     height: 3px;
-    
-    animation: animStar 80s linear infinite;
+
+    animation: animStar 80s linear;
 }
 
 #stars1:after,
@@ -114,7 +123,7 @@ export default {
     from {
         transform: translateY(0px);
     }
-    
+
     to {
         transform: translateY(-2000px);
     }
@@ -124,17 +133,19 @@ export default {
     0% {
         background-position: 0% 50%;
     }
+
     50% {
         background-position: 100% 50%;
     }
+
     100% {
         background-position: 0% 50%;
     }
 }
 
-.close{
+.close {
     min-height: 0px;
     opacity: 0;
-    transition: min-height 2s, opacity 2s cubic-bezier(.75,0,1,.39);
+    transition: min-height 2s, opacity 2s cubic-bezier(.75, 0, 1, .39);
 }
 </style>

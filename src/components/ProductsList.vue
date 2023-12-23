@@ -1,39 +1,30 @@
 <template>
-    <div>
-      <h1>Products List</h1>
-      <CardShell v-for="product in products" :key="product.id" tiltable shiny>
+  <div class="flex justify-center">
+    <div class="flex flex-col mx-8 my-4 gap-8 md:flex-wrap md:max-w-full md:flex-1 md:flex-row md:my-10 justify-center md:px-40 md:mx-20">
+
+      <CardShell class="w-80 h-50 md:max-w-48" v-for="product in productList" :key="product.id" tiltable shiny>
         <Product :product="product" />
       </CardShell>
     </div>
-  </template>
+  </div>
+</template>
   
-  <script>
-  import Product from "./Product.vue";
-  import CardShell from "../layouts/CardShell.vue";
-  
-  export default {
-    components: {
-      Product,
-      CardShell
-    },
-    data() {
-      return {
-        products: []
-      };
-    },
-    mounted() {
-      this.fetchProducts();
-    },
-    methods: {
-      async fetchProducts() {
-        try {
-            const response = await fetch("http://127.0.0.1:3333/products");
-            const data = await response.json();
-            this.products = data;
-        } catch (error) {
-            console.error("Message: " , error);
-        }
-      }
+<script>
+import Product from "./Product.vue";
+import CardShell from "../layouts/CardShell.vue";
+import { mapActions, mapState } from "pinia";
+import { useProductStore } from "../store/products.js";
+
+export default {
+  components: {
+    Product,
+    CardShell
+  },
+  props: {
+    productList: {
+      type: Array,
+      required: true
     }
-  };
-  </script>
+  },
+};
+</script>

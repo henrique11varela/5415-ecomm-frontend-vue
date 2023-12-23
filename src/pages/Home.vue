@@ -1,32 +1,22 @@
 <template>
-    <div class="flex justify-center items-center">
-        <Intro></Intro>
-        <CardShell class="w-52" shiny tiltable>
-            <Item>
-            </Item>
-        </CardShell>
-        <CardShell class="w-52 ms-10" tiltable>
-            <h1>Example</h1>
-        </CardShell>
+  <div class="mt-0">
+    <img class="w-full object-cover h-80" :src="landing" alt="">
+    <div class="h-full">
+      <HomePageText></HomePageText>
     </div>
-    <ProductsList></ProductsList>
+  </div>
 </template>
-
 <script>
-import Intro from '../components/Intro.vue'
-import CardShell from '../layouts/CardShell.vue'
-import Item from "../components/Item.vue";
-import ProductsList from '../components/ProductsList.vue';
-    export default {
-        components: {
-            CardShell,
-            Item,
-            ProductsList,
-            Intro
+import landing from '../assets/landing.jpg'
+import HomePageText from '../components/HomePageText.vue';
+export default {
+    components: {
+        HomePageText
+    },
+    data() {
+        return {
+            landing: landing
         }
     }
+}
 </script>
-
-<style scoped>
-
-</style>

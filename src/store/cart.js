@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia';
-import { useProductStore } from '@/store/products';
+import { useProductStore } from './products';
 
 
 export const useCartStore = defineStore('cart', {
@@ -9,21 +9,28 @@ export const useCartStore = defineStore('cart', {
 
     actions: {
 
-        addToCart(productId) {
-            const productStore = useProductStore(); // create an instance of the product store
+        addToCart(productId, quantity = 1) {
+            const productStore = useProductStore();
             const product = productStore.products.find(item => item.id === productId);
 
             if (product) {
                 const existingProduct = this.cartItems.find(item => item.id === productId);
 
                 if (existingProduct) {
-                    existingProduct.quantity += 1;
+                    if(existingProduct.quantity + quantity < product.quantity) {
+                        existingProduct.quantity += quantity;
+                    }
+                    else{
+                        existingProduct.quantity = product.quantity;
+                        return false;
+                    }
                 } else {
-                    this.cartItems.push({ ...product, quantity: 1 });
+                    this.cartItems.push({ ...product, quantity });
                 }
             } else {
                 console.warn(`Product with ID ${productId} not found.`);
             }
+            return true;
         },
 
         addQuantity(productId) {
@@ -66,10 +73,6 @@ export const useCartStore = defineStore('cart', {
 
         cartTotalPrice() {
             return this.cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
-        },
-
-        cartTotalPriceWithTax() {
-            return this.cartItems.reduce((total, item) => total + item.price * item.quantity * 1.1, 0);
         },
     },
 });
