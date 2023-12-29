@@ -1,7 +1,7 @@
 <template>
-  <div class="mt-0">
+  <div class=" flex flex-col absolute top-0 bottom-0 right-0 left-0 items-center">
     <img class="w-full object-cover h-80" :src="landing" alt="">
-    <div class="h-full">
+    <div class=" flex flex-1 items-center">
       <HomePageText></HomePageText>
     </div>
   </div>
