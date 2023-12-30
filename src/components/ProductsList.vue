@@ -1,6 +1,6 @@
 <template>
   <div class="flex justify-center">
-    <div class="flex flex-col mx-8 my-4 gap-6 sm:flex-wrap md:flex-wrap lg:flex-wrap md:max-w-40 md:flex-1 justify-center md:flex-row md:my-10 md:px-0 md:mx-20 ">
+    <div class="flex flex-col mx-8 my-4 gap-6 justify-center sm:flex-wrap md:flex-1 lg:justify-between md:flex-row md:my-10 md:px-0 md:mx-28">
 
       <CardShell class="w-80" v-for="product in productList" :key="product.id" tiltable shiny>
         <Product :product="product" />
