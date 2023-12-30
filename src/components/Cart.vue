@@ -74,7 +74,7 @@ export default {
         }
     },
     methods: {
-        ...mapActions(useCartStore, ['addToCart', 'removeQuantity', 'clearCart']),
+        ...mapActions(useCartStore, ['addToCart', 'removeQuantity', 'clearCart', 'readLocalStorageCart']),
         async checkCoupon() {
             const couponCode = this.coupon.trim();
 
@@ -119,6 +119,9 @@ export default {
     },
     computed: {
         ...mapState(useCartStore, ['cartItems', 'cartTotalQuantity', 'cartTotalPrice'])
+    },
+    mounted(){
+        this.readLocalStorageCart()
     },
     components: {
         CardShell

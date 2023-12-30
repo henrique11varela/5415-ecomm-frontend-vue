@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia';
 import { useProductStore } from './products';
+import ls from '../services/localstorageHelper.js'
 
 
 export const useCartStore = defineStore('cart', {
@@ -8,6 +9,10 @@ export const useCartStore = defineStore('cart', {
     }),
 
     actions: {
+
+        readLocalStorageCart(){
+            this.cartItems = ls.get('cart')
+        },
 
         addToCart(productId, quantity = 1) {
             const productStore = useProductStore();
@@ -30,6 +35,7 @@ export const useCartStore = defineStore('cart', {
             } else {
                 console.warn(`Product with ID ${productId} not found.`);
             }
+            ls.set('cart', this.cartItems)
             return true;
         },
 
@@ -39,6 +45,7 @@ export const useCartStore = defineStore('cart', {
             if (product) {
                 product.quantity += 1;
             }
+            ls.set('cart', this.cartItems)
         },
 
         removeQuantity(productId) {
@@ -51,18 +58,22 @@ export const useCartStore = defineStore('cart', {
                     this.removeFromCart(productId);
                 }
             }
+            ls.set('cart', this.cartItems)
         },
 
         removeFromCart(productId) {
             this.cartItems = this.cartItems.filter(item => item.id !== productId);
+            ls.set('cart', this.cartItems)
         },
 
         selectProduct(productId) {
             this.cartItems = this.cartItems.filter(item => item.id == productId);
+            ls.set('cart', this.cartItems)
         },
 
         clearCart() {
             this.cartItems = [];
+            ls.set('cart', this.cartItems)
         },
     },
 
