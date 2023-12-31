@@ -3,55 +3,69 @@
         <div class="cartbg" :class="{ open: cartOpen }">
             <div class="cart">
                 <div class="innerCart">
-                    <CardShell v-for="item in cartItems" class="mb-2">
-                        <div class="flex gap-2 mb-2">
-                            <img :src="item.image" alt="image" class="w-1/4">
+                    <CardShell v-for="item in cartItems" class="mb-2 md:flex md:justify-between">
+                        <div class="flex gap-2 mb-2 justify-between">
+                            <img :src="item.image" alt="image" class="w-1/4 md:w-fit md:h-20">
                             <p>{{ item.name }}</p>
-                            <p>{{ item.quantity }}</p>
                         </div>
-                        <div class="flex gap-2">
-                            <button class="bg-primary rounded-lg flex-1" @click="addToCart(item.id)">+</button>
-                            <button class="bg-primary rounded-lg flex-1" @click="removeQuantity(item.id)">-</button>
+                        <div class="flex gap-2 mb-2 justify-evenly items-center md:w-1/4">
+                            <div class="relative flex items-center max-w-[8rem]">
+                                <button type="button" ref="decrement-button" @click="removeQuantity(item.id)"
+                                    id="decrement-button" data-action="decrement"
+                                    class="bg-gray-1 hover:bg-gray-200 border border-gray-300 rounded-l-lg p-3 h-11 focus:ring-gray-100 focus:ring-2 focus:outline-none">
+                                    <svg class="w-3 h-3 text-gray-900" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                        fill="none" viewBox="0 0 18 2">
+                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                            stroke-width="2" d="M1 1h16" />
+                                    </svg>
+                                </button>
+                                <p
+                                    class="bg-gray-50 border-l-0 border-r-0 border-gray-300 h-11 text-center text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5 px-3.5">
+                                    {{ item.quantity }}</p>
+                                <button type="button" ref="increment-button" @click="addToCart(item.id)"
+                                    id="increment-button" data-action="increment"
+                                    class="bg-gray-100 hover:bg-gray-200 border border-gray-300 rounded-r-lg p-3 h-11 focus:ring-gray-100 focus:ring-2 focus:outline-none">
+                                    <svg class="w-3 h-3 text-gray-900" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                        fill="none" viewBox="0 0 18 18">
+                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                            stroke-width="2" d="M9 1v16M1 9h16" />
+                                    </svg>
+                                </button>
+                            </div>
+                            <p>{{ item.price }}€</p>
                         </div>
                     </CardShell>
                 </div>
-                <div class="p-4 md>w-1/4">
-                    <form class="flex flex-col">
-                        <input class="rounded-lg shadow-md shadow-black" :class="{}" type="text" name="coupon"
-                            v-model="coupon">
+                <div class="p-4 md:w-1/4 flex flex-col md:justify-end">
+                    <div>
+                        <label for="coupon">Coupon:</label>
+                        <div class="flex justify-between mb-4">
+                            <input id="coupon" class="w-8/12 rounded-lg shadow-xl shadow-dark-2/20" :class="{}" type="text"
+                                name="coupon" v-model="coupon">
+                            <button class="bg-primary rounded-lg w-3/12 text-light" @click.prevent="checkCoupon">%</button>
+                        </div>
                         <span class="mx-auto text-xs mb-4">{{ resultMessage }}</span>
-                        <button class="bg-primary mb-4 rounded-lg" @click.prevent="checkCoupon">Test Coupon</button>
-                        <p>{{ cartTotalQuantity }}</p>
-                        <p>{{ Math.round(cartTotalPrice * (1 - discount / 100) * 100) / 100 }}</p>
-                        <button class="bg-primary rounded-lg"
-                            @click.prevent="checkoutLocal">Checkout</button>
-                        <button class="bg-primary rounded-lg" @click="clearCart">Clear Cart</button>
-                    </form>
+                    </div>
+                    <p class="mb-2">Quantity: {{ cartTotalQuantity }}</p>
+                    <p class="mb-2">Total: {{ Math.round(cartTotalPrice * (1 - discount / 100) * 100) / 100 }}€</p>
+                    <div class="flex justify-between">
+                        <button class="bg-primary rounded-lg w-3/12 h-16 flex justify-center p-1" @click="clearCart">
+                            <img class="h-full" src="../assets/trash.svg" alt="">
+                        </button>
+                        <button class="bg-primary rounded-lg w-8/12 h-16 flex justify-center p-1"
+                            @click.prevent="checkoutLocal">
+                            <img class="h-full" src="../assets/credit.svg" alt="">
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
         <div class="cartbutton" @click="() => { cartOpen = !cartOpen }">
             <div v-if="cartItems.length > 0">
-                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-                    <g id="SVGRepo_iconCarrier">
-                        <path
-                            d="M21 5L19 12H7.37671M20 16H8L6 3H3M16 5.5H13.5M13.5 5.5H11M13.5 5.5V8M13.5 5.5V3M9 20C9 20.5523 8.55228 21 8 21C7.44772 21 7 20.5523 7 20C7 19.4477 7.44772 19 8 19C8.55228 19 9 19.4477 9 20ZM20 20C20 20.5523 19.5523 21 19 21C18.4477 21 18 20.5523 18 20C18 19.4477 18.4477 19 19 19C19.5523 19 20 19.4477 20 20Z"
-                            stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-                    </g>
-                </svg>
+                <img src="../assets/cartFull.svg" alt="">
             </div>
             <div v-else>
-                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-                    <g id="SVGRepo_iconCarrier">
-                        <path
-                            d="M6.29977 5H21L19 12H7.37671M20 16H8L6 3H3M9 20C9 20.5523 8.55228 21 8 21C7.44772 21 7 20.5523 7 20C7 19.4477 7.44772 19 8 19C8.55228 19 9 19.4477 9 20ZM20 20C20 20.5523 19.5523 21 19 21C18.4477 21 18 20.5523 18 20C18 19.4477 18.4477 19 19 19C19.5523 19 20 19.4477 20 20Z"
-                            stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-                    </g>
-                </svg>
+                <img src="../assets/cartEmpty.svg" alt="">
             </div>
         </div>
     </div>
@@ -96,16 +110,16 @@ export default {
                 this.resultMessage = "Error checking the Coupon. Please, try again!";
             }
         },
-        async checkoutLocal(){
+        async checkoutLocal() {
             if (this.cartTotalQuantity > 0) {
-                const items = this.cartItems.map((item) => { 
+                const items = this.cartItems.map((item) => {
                     return {
                         id: item.id,
                         quantity: item.quantity
-                    } 
+                    }
                 })
                 const success = await checkout(items, this.coupon)
-                if (success){
+                if (success) {
                     this.clearCart()
                     this.coupon = ""
                     alert("YOU BOUGHT STUFF!!")
@@ -120,7 +134,7 @@ export default {
     computed: {
         ...mapState(useCartStore, ['cartItems', 'cartTotalQuantity', 'cartTotalPrice'])
     },
-    mounted(){
+    mounted() {
         this.readLocalStorageCart()
     },
     components: {
@@ -164,8 +178,7 @@ export default {
     height: 0;
     transition: opacity .75s ease-in, width .5s ease-in-out, height .5s ease-in-out;
     opacity: 0;
-    overflow: hidden;
-    @apply bg-light-2 flex flex-col md:flex-row
+    @apply bg-light flex flex-col md:flex-row
 }
 
 .innerCart {
@@ -177,5 +190,4 @@ export default {
     opacity: 1;
     width: calc(100vw - 2.5rem);
     height: calc(100dvh - 2rem);
-}
-</style>
+}</style>
