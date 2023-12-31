@@ -90,7 +90,7 @@ export default {
     },
     methods: {
         ...mapActions(useCartStore, ['addToCart', 'removeQuantity', 'clearCart', 'readLocalStorageCart']),
-        ...mapActions(useProductStore, ['readLocalStorageProducts']),
+        ...mapActions(useProductStore, ['readLocalStorageProducts', 'fetchProductList']),
         async checkCoupon() {
             const couponCode = this.coupon.trim();
 
@@ -125,6 +125,7 @@ export default {
                     this.clearCart()
                     this.coupon = ""
                     alert("YOU BOUGHT STUFF!!")
+                    this.fetchProductList()
                 }
                 else {
                     alert("Error on checkout")
