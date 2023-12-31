@@ -74,6 +74,7 @@
 <script>
 import CardShell from "../layouts/CardShell.vue";
 import { useCartStore } from "../store/cart.js";
+import { useProductStore } from "../store/products.js";
 import { mapState, mapActions } from "pinia";
 import { verifyCoupon } from "../services/couponService.js";
 import { checkout } from "../services/checkoutService.js";
@@ -89,6 +90,7 @@ export default {
     },
     methods: {
         ...mapActions(useCartStore, ['addToCart', 'removeQuantity', 'clearCart', 'readLocalStorageCart']),
+        ...mapActions(useProductStore, ['readLocalStorageProducts']),
         async checkCoupon() {
             const couponCode = this.coupon.trim();
 
@@ -136,6 +138,7 @@ export default {
     },
     mounted() {
         this.readLocalStorageCart()
+        this.readLocalStorageProducts()
     },
     components: {
         CardShell
