@@ -1,5 +1,5 @@
 <template>
-    <div ref="card" class="card w-80" :class="{ tiltable: tiltable, shiny: shiny }">
+    <div ref="card" class="card" :class="{ tiltable: tiltable, shiny: shiny }">
         <slot></slot>
     </div>
 </template>
