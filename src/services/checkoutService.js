@@ -1,8 +1,8 @@
-import { API_URL } from "../../env.js";
-
 export async function checkout(products, couponCode) {
+    const API_URL = import.meta.env.VITE_API_URL
+    const API_PORT = import.meta.env.VITE_API_PORT
     try {
-        const response = await fetch(API_URL + "/checkout", {
+        const response = await fetch(`${API_URL}:${API_PORT}/checkout`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

@@ -2,6 +2,7 @@
 import { defineProps, onMounted, ref } from 'vue'
 import StarRating from "./StarRating.vue";
 import { useCartStore } from "../store/cart.js";
+import { useToastStore } from "../store/toast.js";
 
 const props = defineProps({
   product: {
@@ -12,6 +13,7 @@ const props = defineProps({
 
 const buyQuantity = ref(1);
 const cartStore = useCartStore();
+const toastStore = useToastStore();
 
 const increment = () => {
   if (buyQuantity.value < props.product.quantity) buyQuantity.value++;
@@ -28,10 +30,10 @@ const inputVerifications = () => {
 
 const addToCart = () => {
   if (!cartStore.addToCart(props.product.id, buyQuantity.value)) {
-    alert("Cart quantity changed to maximum available quantity");
+    toastStore.CreateToast(`Cart quantity changed to maximum available quantity`, 3)
   }
   else {
-    alert("Product added to cart");
+    toastStore.CreateToast(`Added item to cart`, 3)
   }
 }
 

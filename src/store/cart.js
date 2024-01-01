@@ -85,5 +85,9 @@ export const useCartStore = defineStore('cart', {
         cartTotalPrice() {
             return this.cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
         },
+
+        cartItemById: (state) => (id) => {
+            return state.cartItems.find((product) => product.id === id);
+        },
     },
 });

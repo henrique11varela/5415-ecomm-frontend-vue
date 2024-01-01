@@ -78,6 +78,7 @@ import { useProductStore } from "../store/products.js";
 import { mapState, mapActions } from "pinia";
 import { verifyCoupon } from "../services/couponService.js";
 import { checkout } from "../services/checkoutService.js";
+import { useToastStore } from "../store/toast.js";
 
 export default {
     data() {
@@ -91,6 +92,7 @@ export default {
     methods: {
         ...mapActions(useCartStore, ['addToCart', 'removeQuantity', 'clearCart', 'readLocalStorageCart']),
         ...mapActions(useProductStore, ['readLocalStorageProducts', 'fetchProductList']),
+        ...mapActions(useToastStore, ['CreateToast']),
         async checkCoupon() {
             const couponCode = this.coupon.trim();
 
@@ -124,7 +126,7 @@ export default {
                 if (success) {
                     this.clearCart()
                     this.coupon = ""
-                    alert("YOU BOUGHT STUFF!!")
+                    this.CreateToast(`You've just bought stuff, Congrats!!`, 10)
                     this.fetchProductList()
                 }
                 else {
@@ -187,6 +189,7 @@ export default {
 
 .innerCart {
     flex-grow: 1;
+    overflow-y: scroll;
 }
 
 .open>.cart {
