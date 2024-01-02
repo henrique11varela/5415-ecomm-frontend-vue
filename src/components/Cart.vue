@@ -61,6 +61,7 @@
             </div>
         </div>
         <div class="cartbutton" @click="() => { cartOpen = !cartOpen }">
+            <div v-if="cartItems.length > 0" class="qtty">{{ cartTotalQuantity }}</div>
             <div v-if="cartItems.length > 0">
                 <img src="../assets/cartFull.svg" alt="">
             </div>
@@ -157,6 +158,10 @@ export default {
     z-index: 50;
     padding: .40rem;
     @apply rounded-full w-16 md:w-16 aspect-square bg-primary
+}
+
+.qtty {
+    @apply absolute bg-red-800 text-light rounded-full aspect-square h-5 text-center text-sm top-0 left-0
 }
 
 .cartbg {
