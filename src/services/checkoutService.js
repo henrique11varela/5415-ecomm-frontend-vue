@@ -12,8 +12,7 @@ export async function checkout(products, couponCode) {
         
         const data = await response.json();
         
-        console.log(data);
-        return data.success
+        return data
     } catch (error) {
         console.log(`Error: ${error}`);
     }

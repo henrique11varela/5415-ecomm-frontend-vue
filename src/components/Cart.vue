@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="cartbg" :class="{ open: cartOpen }">
+        <div class="cartbg" :class="{ open: cartOpen }" @click.self="() => { cartOpen = !cartOpen }">
             <div class="cart">
                 <div class="innerCart">
                     <CardShell v-for="item in cartItems" class="mb-2 md:flex md:justify-between">
@@ -123,17 +123,16 @@ export default {
                         quantity: item.quantity
                     }
                 })
-                const success = await checkout(items, this.coupon)
-                if (success) {
+                const response = await checkout(items, this.coupon)
+                if (response.success) {
                     this.clearCart()
                     this.coupon = ""
-                    this.CreateToast(`You've just bought stuff, Congrats!!`, 10)
+                    this.CreateToast(response.message, 10)
                     this.fetchProductList()
                 }
                 else {
-                    alert("Error on checkout")
+                    this.CreateToast(response.message, 10)
                 }
-
             }
         }
     },
