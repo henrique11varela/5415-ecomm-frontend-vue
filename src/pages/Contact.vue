@@ -1,9 +1,5 @@
 <template>
     <div class="">
-        <div class="w-full pb-2">
-            <img class="w-full h-20"
-                src="https://t3.ftcdn.net/jpg/04/91/00/20/360_F_491002060_jk8W8UA7HFoYhshEKyVjkqKKg9sshLpE.jpg" alt="">
-        </div>
         <div class="md:flex md:max-w-2xl md:w-full md:mx-auto">
             <ContactForm class="" />
             <ContactMap class="" />
