@@ -30,7 +30,13 @@ export const useCartStore = defineStore('cart', {
                         return false;
                     }
                 } else {
-                    this.cartItems.push({ ...product, quantity });
+                    if (quantity <= product.quantity) {   
+                        this.cartItems.push({ ...product, quantity });
+                    }
+                    else {
+                        this.cartItems.push({ ...product, quantity: product.quantity });
+                        return false;
+                    }
                 }
             } else {
                 console.warn(`Product with ID ${productId} not found.`);
