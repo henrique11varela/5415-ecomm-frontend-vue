@@ -8,19 +8,19 @@
                     <div class="mb-4">
                         <label for="name" class="block text-gray-700 text-sm font-bold mb-2">Name</label>
                         <input type="text" v-model="formName" id="name" name="name"
-                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
                     </div>
 
                     <div class="mb-4">
                         <label for="email" class="block text-gray-700 text-sm font-bold mb-2">Email</label>
                         <input type="email" v-model="formEmail" id="email" name="email"
-                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
                     </div>
 
                     <div class="mb-6">
                         <label for="message" class="block text-gray-700 text-sm font-bold mb-2">Message</label>
                         <textarea id="message" v-model="formMessage" name="message" rows="4"
-                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"></textarea>
+                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required></textarea>
                     </div>
 
                     <div>
@@ -56,17 +56,17 @@ const formMessageRegex = /^\S.[^\r]{1,250}$/; // cannot start with white space o
 
 const formVerifications = () =>{
 
-  if(!nameRegex.test(formName.value)){
+  if(!nameRegex.test(formName.value) || !formName.value){
     toastStore.CreateToast("Please enter a valid name", 5);
     return false;
   }
 
-  if(!emailRegex.test(formEmail.value)){
+  if(!emailRegex.test(formEmail.value) || !formEmail.value){
     toastStore.CreateToast("Please enter a valid email", 5);
     return false;
   }
 
-  if(!formMessageRegex.test(formMessage.value)){
+  if(!formMessageRegex.test(formMessage.value) || !formMessage.value){
     toastStore.CreateToast("Please enter a valid message", 5);
     return false;
   }
