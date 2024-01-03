@@ -1,7 +1,6 @@
 <template>
-  <div class='console-container items-center'>
-    <span ref='text'></span>
-    <div class='console-underscore' ref='console'>&#95;</div>
+  <div class='console-container mx-8'>
+    <span ref='text' ></span>
   </div>
 </template>
 
@@ -19,8 +18,6 @@ export default {
   methods: {
     consoleText(words, colors) {
       if (colors === undefined) colors = ['#fff'];
-      let visible = true;
-      let con = this.$refs.console
       let letterCount = 1;
       let x = 1;
       let waiting = false;
@@ -54,16 +51,6 @@ export default {
           letterCount += x;
         }
       }, 120)
-      window.setInterval(function () {
-        if (visible === true) {
-          con.className = 'console-underscore hidden'
-          visible = false;
-        } else {
-          
-          con.className = 'console-underscore'
-          visible = true;
-        }
-      }, 400)
     }
   }
 }
@@ -80,23 +67,11 @@ export default {
   font-family: Montserrat;
   font-size: 4em;
   text-align: center;
-  height: 200px;
-  width: 600px;
+  height: max-content;
+  max-width: 100vw;
   display: block;
   color: white;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  margin: auto;
-}
 
-.console-underscore {
-  display: inline-block;
-  position: relative;
-  color: black;
-  top: -0.14em;
-  left: 10px;
 }
 </style>
   

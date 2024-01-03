@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia';
 import { useProductService } from '../services/productService';
+import ls from '../services/localstorageHelper.js'
 
 export const useProductStore = defineStore('products', {
     state: () => ({
@@ -20,15 +21,21 @@ export const useProductStore = defineStore('products', {
     //   }
 
     actions: {
+        readLocalStorageProducts(){
+            if (this.products.length == 0) {
+                this.products = ls.get('products')
+            }
+        },
+
         async fetchProductList() {
             const productService = useProductService();
-
             try {
                 const products = await productService.fetchProducts();
                 this.products = products;
             } catch (error) {
                 console.error('Error fetching product list:', error);
             }
+            ls.set('products', this.products)
         },
     },
 

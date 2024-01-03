@@ -29,13 +29,15 @@ export default {
         }
     },
     mounted() {
-        this.$refs.stars1.style.boxShadow = this.multipleBoxShadow(700);
-        this.$refs.stars2.style.boxShadow = this.multipleBoxShadow(700);
-        this.$refs.stars3.style.boxShadow = this.multipleBoxShadow(500);
-        setTimeout(() => {
-            this.$refs.intro.classList.add('close')
-        }, 3000);
-        localStorage.setItem('introPlayed', 'true')
+        if (this.playIntro) {
+            this.$refs.stars1.style.boxShadow = this.multipleBoxShadow(700);
+            this.$refs.stars2.style.boxShadow = this.multipleBoxShadow(700);
+            this.$refs.stars3.style.boxShadow = this.multipleBoxShadow(500);
+            setTimeout(() => {
+                this.$refs.intro.classList.add('close')
+            }, 3000);
+            localStorage.setItem('introPlayed', 'true')
+        }
         window.onbeforeunload = function (e) {
             localStorage.removeItem('introPlayed')
         };

@@ -1,7 +1,14 @@
-# Vue 3 + Vite
+# Starlight
 
-This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+This is a school frontend project for [this api](https://github.com/henrique11varela/5415-ecomm-backend-adonisjs)
 
-## Recommended IDE Setup
+![desktop](./readme_assets/desktop.png)
+![mobile](./readme_assets/mobile.png)
 
-- [VS Code](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+## Setup
+
+```shell
+npm i
+cp .env.example .env
+npm run dev
+```

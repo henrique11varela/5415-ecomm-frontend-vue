@@ -6,6 +6,7 @@ import Footer from './components/Footer.vue'
 
 import Cart from './components/Cart.vue'
 import Intro from './components/Intro.vue'
+import ToastGroup from "./components/ToastGroup.vue";
 
 
 </script>
@@ -17,14 +18,10 @@ import Intro from './components/Intro.vue'
       <Navbar></Navbar>
     </template>
 
-
-
-<!--        <Intro></Intro>-->
-
-
+      <Intro></Intro>
       <RouterView />
       <Cart />
-
+      <ToastGroup />
     <template v-slot:footer>
       <Footer></Footer>
     </template>
